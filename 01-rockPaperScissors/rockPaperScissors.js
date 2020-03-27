@@ -14,30 +14,47 @@
 * rockPaperScissors(5); // => [['rock', 'rock', 'rock', 'rock', 'rock'], etc...]
 */
 
-const rockPaperScissors = function() {
+const rockPaperScissors = function(p) {
   // TODO: Your code here!
   let result = [];
   let rock = 'rock',
     scissors = 'scissors',
     paper = 'paper';
-
-  let select = [];
-
-  let DFS = function(cnt) {
-    if (cnt === 3) {
-      let temp = [];
-      for (let i = 0; i < 3; i++) {
-        temp.push(select[i]);
-      }
-      result.push(temp);
-      return;
-    }
-    for (let i = 0; i < 3; i++) {
-      select[cnt] = allcase[i];
-      DFS(cnt + 1);
-    }
-  };
   let allcase = [rock, paper, scissors];
-  DFS(0, 0);
+  let select = [];
+  let DFS;
+  if (p === undefined) {
+    DFS = function(cnt) {
+      if (cnt === 3) {
+        let temp = [];
+        for (let i = 0; i < 3; i++) {
+          temp.push(select[i]);
+        }
+        result.push(temp);
+        return;
+      }
+      for (let i = 0; i < 3; i++) {
+        select[cnt] = allcase[i];
+        DFS(cnt + 1);
+      }
+    };
+  } else {
+    DFS = function(cnt) {
+      if (cnt === p) {
+        let temp = [];
+        for (let i = 0; i < p; i++) {
+          temp.push(select[i]);
+        }
+        result.push(temp);
+        return;
+      }
+      for (let i = 0; i < 3; i++) {
+        select[cnt] = allcase[i];
+        DFS(cnt + 1);
+      }
+    };
+  }
+
+  DFS(0);
   return result;
 };
