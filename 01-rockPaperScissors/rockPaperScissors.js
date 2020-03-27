@@ -16,4 +16,28 @@
 
 const rockPaperScissors = function() {
   // TODO: Your code here!
+  let result = [];
+  let rock = 'rock',
+    scissors = 'scissors',
+    paper = 'paper';
+
+  let select = [];
+
+  let DFS = function(cnt) {
+    if (cnt === 3) {
+      let temp = [];
+      for (let i = 0; i < 3; i++) {
+        temp.push(select[i]);
+      }
+      result.push(temp);
+      return;
+    }
+    for (let i = 0; i < 3; i++) {
+      select[cnt] = allcase[i];
+      DFS(cnt + 1);
+    }
+  };
+  let allcase = [rock, paper, scissors];
+  DFS(0, 0);
+  return result;
 };
