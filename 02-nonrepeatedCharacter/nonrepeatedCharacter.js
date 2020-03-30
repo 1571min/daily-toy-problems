@@ -5,6 +5,26 @@
  *   firstNonRepeatedCharacter('AACBDB'); // => 'C'
  */
 
+// 객체를 이용해서 카운팅 후 비교
 const firstNonRepeatedCharacter = function(string) {
-  // TODO: Your code here!
+  let arrStr = string.split('');
+  let objStr = arrStr.reduce((acc, ele, idx) => {
+    acc[ele] = acc[ele] || [0, idx];
+    acc[ele][0] += 1;
+    return acc;
+  }, {});
+
+  let result;
+  for (let ele in objStr) {
+    if (objStr[ele][0] === 1) {
+      result = result || [ele, objStr[ele][1]];
+      if (objStr[ele][1] < result[1]) {
+        result = [ele, objStr[ele][1]];
+      }
+    }
+  }
+  if (result === undefined) {
+    return null;
+  }
+  return result[0];
 };
