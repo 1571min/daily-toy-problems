@@ -21,4 +21,55 @@
 
 Array.prototype.isSubsetOf = function(array) {
   // TODO: Your code here!
+  let result = true;
+  this.forEach(ele => {
+    if (typeof ele === 'object') {
+      if (!ishaveObj(ele, array)) {
+        result = false;
+      }
+    } else {
+      if (!array.includes(ele)) {
+        result = false;
+      }
+    }
+  });
+  return result;
 };
+
+function ishaveObj(obj, arr) {
+  let result = false;
+  if (Array.isArray(obj)) {
+    arr.forEach(ele => {
+      if (Array.isArray(ele)) {
+        if (isEqualArr(ele, obj)) {
+          result = true;
+        }
+      }
+    });
+  } else {
+    arr.forEach(ele => {
+      if (isEqualObj(ele, obj)) {
+        result = true;
+      }
+    });
+  }
+  return result;
+}
+
+function isEqualObj(obj1, obj2) {
+  for (const key in obj1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function isEqualArr(arr1, arr2) {
+  arr1.forEach((ele, idx) => {
+    if (ele !== arr2[idx]) {
+      return false;
+    }
+  });
+  return true;
+}
