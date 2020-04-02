@@ -22,5 +22,18 @@
  */
 
 const nthFibonacci = function(n) {
-  // TODO: Your code here!
+  let before = 1;
+  let after = 1;
+  let temp;
+  if (n === 0) {
+    return 0;
+  } else if (1 <= n && n <= 2) {
+    return 1;
+  }
+  for (let i = 2; i < n; i++) {
+    temp = after;
+    after = after + before;
+    before = temp;
+  }
+  return after;
 };
