@@ -35,10 +35,27 @@
  */
 
 // i를 선언하여, 테스트를 원활하게 할 수 있습니다.
-let i;
+// let i;
 
 // 헬퍼 함수가 필요하다면 얼마든지 만들어서 사용하세요!
+function swap(array, indexA, indexB) {
+  let temp = array[indexA];
+  array[indexA] = array[indexB];
+  array[indexB] = temp;
+}
 
 const bubbleSort = function(array) {
-  // TODO: Your code here!
+  for (let i = 0; i < array.length; i++) {
+    let count = 0;
+    for (let j = 0; j < array.length - i; j++) {
+      if (array[j] > array[j + 1]) {
+        count++;
+        swap(array, j, j + 1);
+      }
+    }
+    if (count === 0) {
+      return array;
+    }
+  }
+  return array;
 };
