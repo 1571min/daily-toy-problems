@@ -6,6 +6,25 @@
  * Advanced : 두 개 이상의 문자열을 받을 수 있도록 기능을 확장하세요.
  */
 
-const commonCharacters = function(string1, string2) {
-  // TODO: Your code here!
+const commonCharacters = function (...args) {
+  let result = [];
+  args[0].split('').forEach((element) => {
+    let check = true;
+    // for (let i = 1; i < arguments.length; i++) {
+    //   if (!arguments[i].includes(element)) {
+    //     return;
+    //   }
+    // }
+    args.forEach((innerelement) => {
+      if (!innerelement.includes(element)) {
+        check = false;
+      }
+    });
+    if (check) {
+      if (!result.includes(element)) {
+        result.push(element);
+      }
+    }
+  });
+  return result.join('');
 };
