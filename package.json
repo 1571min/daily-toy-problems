@@ -6,7 +6,10 @@
   "scripts": {
     "submit": "node .travis/submit.js",
     "test": "node .travis/getdailyscript.js | bash",
-    "toy01": "mocha 01-rockPaperScissors"
+    "toy01": "mocha 01-rockPaperScissors",
+    "toy02": "mocha 02-nonrepeatedCharacter",
+    "toy03": "mocha 03-isSubsetOf",
+    "toy05": "mocha 05-bubbleSort"
   },
   "author": "codestates",
   "devDependencies": {
