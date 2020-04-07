@@ -53,8 +53,7 @@ Tree.prototype.DFSelect = function (filter) {
       return;
     }
     for (let i = 0; i < tree.children.length; i++) {
-      // this.children[i].DFSelect(filter);
-      DFS(tree.children[i], depth++);
+      DFS(tree.children[i], ++depth);
       depth--;
     }
   };
