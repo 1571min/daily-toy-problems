@@ -32,13 +32,34 @@
  * value를 저장하는 기본적인 tree입니다.
  */
 
-let Tree = function(value) {
+let Tree = function (value) {
   this.value = value;
   this.children = [];
 };
 
-Tree.prototype.DFSelect = function(filter) {
-    // TODO: Your code here!
+Tree.prototype.DFSelect = function (filter) {
+  // TODO: Your code here!
+  //탈출조건
+  // 자식이 없을 때 까지
+  //재귀호출
+  //호출하기 전에 fillter로 푸쉬하고
+  //for 문을 이용해서 호출
+  let result = [];
+  let DFS = function (tree, depth) {
+    if (filter(tree.value, depth)) {
+      result.push(tree.value);
+    }
+    if (!tree.children) {
+      return;
+    }
+    for (let i = 0; i < tree.children.length; i++) {
+      // this.children[i].DFSelect(filter);
+      DFS(tree.children[i], depth++);
+      depth--;
+    }
+  };
+  DFS(this, 0);
+  return result;
 };
 
 /*
@@ -49,7 +70,7 @@ Tree.prototype.DFSelect = function(filter) {
  * child를 추가합니다.
  * (Tree가 아닌 값이 들어올 경우, Tree 객체 형태로 변환 후 추가합니다.)
  */
-Tree.prototype.addChild = function(child) {
+Tree.prototype.addChild = function (child) {
   if (!child || !(child instanceof Tree)) {
     child = new Tree(child);
   }
@@ -66,7 +87,7 @@ Tree.prototype.addChild = function(child) {
 /*
  * 주어진 tree가 이미 해당 tree 혹은 sub tree의 child인지 확인합니다.
  */
-Tree.prototype.isDescendant = function(child) {
+Tree.prototype.isDescendant = function (child) {
   if (this.children.indexOf(child) !== -1) {
     // `child`는 해당 트리와 연결된 하위 노드를 의미합니다.
     return true;
@@ -83,7 +104,7 @@ Tree.prototype.isDescendant = function(child) {
 /*
  * child를 삭제합니다.
  */
-Tree.prototype.removeChild = function(child) {
+Tree.prototype.removeChild = function (child) {
   let index = this.children.indexOf(child);
   if (index !== -1) {
     // child를 삭제합니다.
