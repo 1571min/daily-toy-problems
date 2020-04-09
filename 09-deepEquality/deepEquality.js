@@ -11,6 +11,20 @@
  * 순환객체 레퍼런스 : https://riptutorial.com/javascript/example/14476/cyclic-object-values
  */
 
-const deepEquals = function(apple, orange) {
+const deepEquals = function (apple, orange) {
   // TODO: Your code here!
+  return isEqualObj(apple, orange) && isEqualObj(orange, apple);
 };
+
+function isEqualObj(obj1, obj2) {
+  for (const key in obj1) {
+    if (obj1[key] !== obj2[key]) {
+      if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+        return isEqualObj(obj1[key], obj2[key]);
+      } else {
+        return false;
+      }
+    }
+  }
+  return true;
+}
