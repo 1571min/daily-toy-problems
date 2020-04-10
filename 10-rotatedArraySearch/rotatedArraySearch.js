@@ -12,6 +12,30 @@
  * 시간 복잡도가 O(log(array.length))이 되도록 도전해 보세요!
  */
 
-const rotatedArraySearch = function(rotated, target) {
+const rotatedArraySearch = function (rotated, target) {
   // TODO : Your code here!
+  let midle;
+  let low = 0;
+  let high = rotated.length - 1;
+  while (low <= high) {
+    midle = Math.floor((low + high) / 2);
+    if (target === rotated[midle]) return midle;
+    if (
+      (target > rotated[midle + 1] && target > rotated[midle - 1]) ||
+      (target < rotated[midle + 1] && target < rotated[midle - 1])
+    ) {
+      if (target > rotated[midle - 2]) {
+        low = midle + 2;
+      } else {
+        high = midle - 2;
+      }
+    } else {
+      if (target > rotated[midle - 1]) {
+        low = midle + 1;
+      } else {
+        high = midle - 1;
+      }
+    }
+  }
+  return null;
 };
