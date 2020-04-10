@@ -14,27 +14,16 @@
 
 const rotatedArraySearch = function (rotated, target) {
   // TODO : Your code here!
-  let midle;
+  let middle;
   let low = 0;
   let high = rotated.length - 1;
   while (low <= high) {
-    midle = Math.floor((low + high) / 2);
-    if (target === rotated[midle]) return midle;
-    if (
-      (target > rotated[midle + 1] && target > rotated[midle - 1]) ||
-      (target < rotated[midle + 1] && target < rotated[midle - 1])
-    ) {
-      if (target > rotated[midle - 2]) {
-        low = midle + 2;
-      } else {
-        high = midle - 2;
-      }
+    middle = Math.floor((low + high) / 2);
+    if (target === rotated[middle]) return middle;
+    else if (target > rotated[middle]) {
+      low = middle + 1;
     } else {
-      if (target > rotated[midle - 1]) {
-        low = midle + 1;
-      } else {
-        high = midle - 1;
-      }
+      high = middle - 1;
     }
   }
   return null;
