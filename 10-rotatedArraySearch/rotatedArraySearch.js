@@ -14,17 +14,40 @@
 
 const rotatedArraySearch = function (rotated, target) {
   // TODO : Your code here!
-  let middle;
-  let low = 0;
-  let high = rotated.length - 1;
-  while (low <= high) {
-    middle = Math.floor((low + high) / 2);
-    if (target === rotated[middle]) return middle;
-    else if (target > rotated[middle]) {
-      low = middle + 1;
+  // 복습 :
+  // 이진 탐색과 비슷 그러나 대소를 비교할 때 범위를 이용해서 비교
+  // 초기값 마지막 값
+  // 두개가 같아 지거나 커질 때 까지
+  // 만약에 중간 값이 처음 값 보다 크면( 정상 배열 )
+  //  앞부분 범위 체크
+  //      범위에 들면 마지막 middle-1
+  //      범위에 안들면 초기값 middle +1
+  //작으면 ( 회전 배열 )
+  // 뒤 부분 범위 체크
+  //      범위에 들면 마지막 middle+1
+  //      범위에 안들면 초기값 middle -1
+  let result = null;
+  let first = 0;
+  let last = rotated.length - 1;
+  while (first <= last) {
+    let middle = Math.floor((first + last) / 2);
+    if (rotated[middle] === target) {
+      result = middle;
+      break;
+    }
+    if (rotated[first] < rotated[middle]) {
+      if (rotated[first] <= target && target < rotated[middle]) {
+        last = middle - 1;
+      } else {
+        first = middle + 1;
+      }
     } else {
-      high = middle - 1;
+      if (rotated[middle] <= target && target < rotated[last]) {
+        first = middle + 1;
+      } else {
+        last = middle - 1;
+      }
     }
   }
-  return null;
+  return result;
 };
