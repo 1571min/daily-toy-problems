@@ -19,6 +19,35 @@
  * -> ["", "j", "ju", "jm", "jp", "jmu", "jmp", "jpu", "jmpu", "u", "m", "p", "mu", "mp", "pu", "mpu"]
  */
 
-const powerSet = function(str) {
+const powerSet = function (str) {
   // TODO: Your code here!
+  //조합
+  let strArr = ['', ...str.split('')];
+  let indexArr = [];
+  let result = [];
+  let checkIndex = Array(strArr.length).fill(0);
+  let recursion = () => {
+    //탈출조건
+    //index ===length
+    if (indexArr.length === strArr.length - 1) {
+      //  결과배열에 배열 문자열 모두 합해서 push
+      let strTemp = indexArr.join('');
+      if (!result.includes(strTemp)) {
+        result.push(strTemp);
+      }
+      return;
+    }
+    for (let i = 0; i < strArr.length; i++) {
+      //재귀 호출
+      if (checkIndex[i] === 1 && i !== 0) continue;
+      checkIndex[i] = 1;
+      indexArr.push(strArr[i]);
+      recursion();
+      indexArr.pop();
+      checkIndex[i] = 0;
+    }
+  };
+  recursion();
+
+  return result.sort();
 };
