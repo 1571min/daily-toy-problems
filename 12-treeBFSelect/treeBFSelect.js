@@ -66,27 +66,25 @@ Queue.prototype.size = function () {
 let Tree = function (value) {
   this.value = value;
   this.children = [];
+  this.depth = 0;
 };
 
 Tree.prototype.BFSelect = function (filter) {
   let result = [];
   let count = 0;
-  let treecount = 0;
+  let treecount = 1;
   let queue = new Queue();
   queue.enqueue(this);
 
   while (!queue.isEmpty()) {
     let temp = queue.dequeue();
-    if (filter(temp.value, count)) {
+    if (filter(temp.value, temp.depth)) {
       result.push(temp.value);
     }
     temp.children.forEach((element) => {
       treecount += 1;
       queue.enqueue(element);
     });
-    if (treecount + 1 === (count + 2) * 2) {
-      count += 1;
-    }
   }
 
   return result;
@@ -111,6 +109,7 @@ Tree.prototype.addChild = function (child) {
     throw new Error('That child is already a child of this tree');
   }
   // 편의를 위해 추가된 child node를 return합니다.
+  child.depth = this.depth + 1;
   return child;
 };
 
