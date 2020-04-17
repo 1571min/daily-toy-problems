@@ -26,10 +26,24 @@
  */
 'use strict';
 
-const compose = function() {
-  // TODO: Your code here!
+const compose = function () {
+  let functionList = [...arguments];
+  return function (params) {
+    let temp = functionList[functionList.length - 1](params);
+    for (let i = functionList.length - 2; i >= 0; i--) {
+      temp = functionList[i](temp);
+    }
+    return temp;
+  };
 };
 
-const pipe = function() {
-  // TODO: Your code here!
+const pipe = function () {
+  let functionList = [...arguments];
+  return function (params) {
+    let temp = functionList[0](params);
+    for (let i = 1; i < functionList.length; i++) {
+      temp = functionList[i](temp);
+    }
+    return temp;
+  };
 };
