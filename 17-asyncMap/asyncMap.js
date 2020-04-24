@@ -38,6 +38,20 @@
  *
  */
 
-
-var asyncMap = function(tasks, callback){
+var asyncMap = function (tasks, callback) {
+  //tasks가 배열이고
+  //배열의 순서대로 비동기가 호출 되야?
+  //()=>{task[0](callback=}
+  let result = [];
+  let recursion = function (idx, tasks) {
+    if (idx === tasks.length) {
+      callback(result);
+      return;
+    }
+    tasks[idx]((temp) => {
+      result.push(temp);
+      recursion(idx + 1, tasks);
+    });
+  };
+  recursion(0, tasks);
 };
