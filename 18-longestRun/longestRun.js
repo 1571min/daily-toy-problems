@@ -14,15 +14,45 @@
 
 var longestRun = function (string) {
   // TODO: Your code here!
+  let countObj = {};
+  let count = 1;
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === string[i + 1]) {
+      count += 1;
+    } else {
+      let newObj = {
+        start: i !== 1 ? i - count + 1 : i - 1,
+        end: i,
+        count: count,
+      };
+      countObj[i] = newObj;
+      count = 1;
+    }
+  }
+  return searchMax(countObj);
 };
+
+function searchMax(cntObj) {
+  let max = {
+    result: [0, 0],
+    count: 0,
+  };
+  for (const key in cntObj) {
+    if (max.count < cntObj[key].count) {
+      max.result = [cntObj[key].start, cntObj[key].end];
+      max.count = cntObj[key].count;
+    }
+  }
+  return max.result;
+}
 
 // If you need a random string generator, use this!
 // (you wont need this function for your solution but it may help with testing)
 var randomString = function (len) {
-  var text = "";
-  var possible = "abcdefghijklmnopqrstuvwxyz";
+  var text = '';
+  var possible = 'abcdefghijklmnopqrstuvwxyz';
 
-  for(var i = 0; i < len; i++) {
+  for (var i = 0; i < len; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
 
