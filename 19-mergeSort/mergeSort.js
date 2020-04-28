@@ -95,8 +95,39 @@
  *
  */
 
+// function combineArray(arr1, arr2) {
+//   let newArr = [];
+//   while (arr1.length !== 0 && arr2.length !== 0) {
+//     if (arr1[0] > arr2[0]) {
+//       newArr.push(arr2.shift());
+//     } else {
+//       newArr.push(arr1.shift());
+//     }
+//   }
+//   for (let i = 0; i < arr1.length; i++) {
+//     newArr.push(arr1.shift());
+//   }
+//   for (let i = 0; i < arr2.length; i++) {
+//     newArr.push(arr2.shift());
+//   }
+//   return newArr;
+// }
 
+// //using recursion
+// var mergeSort = function (array) {
+//   //탈출 조건이 array의 길이가 1일 때
+//   let mergeRecursion = function (arr) {
+//     if (arr.length === 1) {
+//       return arr;
+//     }
+//     let mid = Math.floor(arr.length / 2);
+//     let left = mergeRecursion(arr.slice(0, mid));
+//     let right = mergeRecursion(arr.slice(mid));
+//     return combineArray(left, right);
+//   };
 
-var mergeSort = function(array) {
-  // Your code here.
-};
+//   return mergeRecursion(array);
+// };
+
+// //using recursion index 이용해서 다시
+var mergeSort = function (array) {};
