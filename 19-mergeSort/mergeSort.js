@@ -130,4 +130,40 @@
 // };
 
 // //using recursion index 이용해서 다시
-var mergeSort = function (array) {};
+let sorted = [];
+
+function merge(array, left, mid, right) {
+  let i, j, k, l;
+  i = left;
+  j = mid + 1;
+  k = left;
+
+  while (i <= mid && j <= right) {
+    if (array[i] <= array[j]) sorted[k++] = array[i++];
+    else sorted[k++] = array[j++];
+  }
+  if (i > mid) {
+    for (l = j; l <= right; l++) {
+      sorted[k++] = array[l];
+    }
+  } else {
+    for (l = i; l <= right; l++) {
+      sorted[k++] = array[l];
+    }
+  }
+  for (l = left; l <= right; l++) array[l] = sorted[l];
+}
+
+var mergeSort = function (array) {
+  let recursion = function (array, left, right) {
+    let mid;
+    if (left < right) {
+      mid = Math.floor((left + right) / 2);
+      recursion(array, left, mid);
+      recursion(array, mid + 1, right);
+      merge(array, left, mid, right);
+    }
+  };
+  recursion(array, 0, array.length - 1);
+  return array;
+};
