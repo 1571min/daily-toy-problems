@@ -48,20 +48,16 @@ var rotateMatrix = function (matrix, isCounter = 1) {
   if (matrix[0] === undefined) {
     return [];
   }
-  let newArr;
+  let newArr = Array(matrix[0].length)
+    .fill(null)
+    .map(() => Array());
   if (isCounter > 0) {
-    newArr = Array(matrix[0].length)
-      .fill(null)
-      .map(() => Array());
     for (let i = 0; i < matrix[0].length; i++) {
       for (let j = 0; j < matrix.length; j++) {
         newArr[i][j] = matrix[matrix.length - j - 1][i];
       }
     }
   } else {
-    newArr = Array(matrix[0].length)
-      .fill(null)
-      .map(() => Array());
     for (let i = 0; i < matrix[0].length; i++) {
       for (let j = 0; j < matrix.length; j++) {
         newArr[i][j] = matrix[j][matrix.length - i - 1];
