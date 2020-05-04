@@ -1,4 +1,4 @@
-/**
+/*
  * Given an array containing a deck of cards, implement a function that shuffles
  * the deck.
  *
@@ -31,19 +31,34 @@
  *   See https://www.dartmouth.edu/~chance/teaching_aids/books_articles/Mann.pdf .
  */
 
-var shuffleDeck = function(deck) {
+var shuffleDeck = function (deck) {
   // Your code here
+  let newDeck = [];
+  // 완전한 랜덤
+  // 자기 자신의 위치 x
+  // 이전에 했던 위치 x
+  let checkArr = Array(deck.length).fill(0);
+  for (let i = deck.length - 1; i >= 0; i--) {
+    let idx = Math.floor(Math.random() * deck.length);
+    if (i === idx) {
+      i += 1;
+    } else {
+      newDeck.push(deck[idx]);
+    }
+  }
+
+  return newDeck;
 };
 
 // Ordered deck generator provided for your testing convenience
 // (You may alter this function, but an unaltered copy will be used for tests.)
-var orderedDeck = function() {
-  var suits = [ '♥', '♣', '♠', '♦' ];
-  var values = [ 'A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K' ];
+var orderedDeck = function () {
+  var suits = ['♥', '♣', '♠', '♦'];
+  var values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
   var deck = [];
 
-  suits.forEach(function(suit) {
-    values.forEach(function(value) {
+  suits.forEach(function (suit) {
+    values.forEach(function (value) {
       deck.push(value + suit);
     });
   });
