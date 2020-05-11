@@ -16,24 +16,54 @@
 // list.removeHead(); //yields '4'
 // list.tail.value;   //yields '5';
 
-
-var LinkedList = function(){
+var LinkedList = function () {
   //fill me in!
+  // this.storage={};
+  this.head = null;
+  this.tail = null;
 };
 
 //write methods here!
 
-LinkedList.prototype.addToTail = function(
-){
+LinkedList.prototype.addToTail = function (value) {
+  if (this.head === null) {
+    this.head = this.makeNode(value);
+    this.tail = this.head;
+  } else {
+    let nNode = this.makeNode(value);
+    this.tail.nextNode = nNode;
+    this.tail = nNode;
+  }
 };
 
-LinkedList.prototype.removeHead = function(){
+LinkedList.prototype.removeHead = function () {
+  let temp = this.head;
+  if (this.head === this.tail) {
+    this.head = null;
+    this.tail = null;
+  } else {
+    this.head = this.head.nextNode;
+  }
+  delete temp;
+  return;
 };
 
-LinkedList.prototype.contains = function(
-){
+LinkedList.prototype.contains = function (value) {
+  let itter = this.head;
+  while (itter !== null) {
+    if (itter.value === value) {
+      return true;
+    }
+    itter = itter.nextNode;
+  }
+  return false;
 };
 
-LinkedList.prototype.makeNode = function(
-){
+LinkedList.prototype.makeNode = function (value) {
+  let newNode = {
+    value: value,
+    nextNode: null,
+  };
+
+  return newNode;
 };
