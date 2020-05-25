@@ -10,4 +10,19 @@
  */
 
 // Solved in O(n) time with O(1) memory
-var sumArray = function(array) {};
+var sumArray = function (array) {
+  let sum = array.reduce((acc, cur) => acc + cur);
+  while (array.length !== 0) {
+    for (let i = 0; i < array.length; i++) {
+      let temp = 0;
+      for (let j = i; j < array.length; j++) {
+        temp += array[j];
+      }
+      if (temp > sum) {
+        sum = temp;
+      }
+    }
+    array.pop();
+  }
+  return sum;
+};
