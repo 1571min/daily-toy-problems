@@ -1,15 +1,15 @@
 /**
-* Extend the Number prototype with a new method called `toEnglish`.
-* It should return the number as a string using English words.
-* Examples:
-*   (7).toEnglish(); // > "seven"
-*   (575).toEnglish(); // > "five hundred seventy-five"
-*   (78193512).toEnglish(); // > "seventy-eight million one hundred ninety-three thousand five hundred twelve"
-*
-* Extra credit: Make your function support decimals.
-* Example:
-*   (150043.273).toEnglish() // > "one hundred fifty thousand forty-three and two hundred seventy three thousandths"
-*
+ * Extend the Number prototype with a new method called `toEnglish`.
+ * It should return the number as a string using English words.
+ * Examples:
+ *   (7).toEnglish(); // > "seven"
+ *   (575).toEnglish(); // > "five hundred seventy-five"
+ *   (78193512).toEnglish(); // > "seventy-eight million one hundred ninety-three thousand five hundred twelve"
+ *
+ * Extra credit: Make your function support decimals.
+ * Example:
+ *   (150043.273).toEnglish() // > "one hundred fifty thousand forty-three and two hundred seventy three thousandths"
+ *
  */
 
 var numbersToWords = {
@@ -55,4 +55,31 @@ var numbersToPlace = {
 
 Number.prototype.toEnglish = function () {
   // return my value as english words
+  let result = '';
+  if (numbersToWords.hasOwnProperty(this.toString())) {
+    result = numbersToWords[this.toString()];
+    return result;
+  } else {
+    if (this > 10) {
+      let temp = this - Math.floor(this / 10) * 10;
+      result =
+        result +
+        numbersToWords[(Math.floor(this / 10) * 10).toString()] +
+        '-' +
+        numbersToWords[temp.toString()];
+    }
+  }
+  return result;
+
+  /*
+   *   나중에 다시 풀어야됌
+   *   재귀를 이용
+   *   {
+   *    십의 자리 숫자로 나눈값의 십의자리 수를 곱한걸 뺀게 0이면 탈출{
+   *      return 숫자 바로 변환
+   *    }
+   *
+   *    return ''+재귀 호출( 나눈 몫을 다시 호출) +재귀 호출(몫의 이용해서 뺀 나머지)
+   *   }
+   */
 };
