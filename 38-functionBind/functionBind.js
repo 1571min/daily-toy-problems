@@ -23,8 +23,14 @@
  *
  */
 
-var bind = function() {
-  // TODO: Your code here
+let bind = function (func, context) {
+  let previousArgs = [].slice.call(arguments, 2);
+  return function (arg) {
+    // context is the context passed in above.
+    // previousArgs = previousArgs.concat(arg);
+    console.log(previousArgs);
+    return func.apply(context, previousArgs.concat(arg));
+  };
 };
 
 /*
@@ -52,9 +58,9 @@ var bind = function() {
  *
  */
 
-Function.prototype.bind = function() {
-  // TODO: Your code here
-  return function() {
-    // TODO: Your code here, too
+Function.prototype.bind = function (context) {
+  let previousArgs = [].slice.call(arguments, 2);
+  return function () {
+    return Function.prototype.apply(context, previousArgs);
   };
 };
