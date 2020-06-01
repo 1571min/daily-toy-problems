@@ -24,8 +24,24 @@ makeChange(1) === 1
 makeChange(2) === 2
 */
 
-var makeChange = function(total){
-
+var makeChange = function (total) {
+  let resultCount = 0;
+  let coinArr = [1, 2, 5, 10, 20, 50, 100, 200];
+  let sum = 0;
+  //중복조합
+  let recursion = (index, cur) => {
+    if (cur >= total) {
+      if (cur === total) {
+        resultCount += 1;
+      }
+      return;
+    }
+    for (let i = index; i < coinArr.length; i++) {
+      cur += coinArr[i];
+      recursion(i, cur);
+      cur -= coinArr[i];
+    }
+  };
+  recursion(0, sum);
+  return resultCount;
 };
-
-
