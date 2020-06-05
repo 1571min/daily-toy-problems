@@ -7,4 +7,13 @@
 
 function threeFiveMultiples(num) {
   // 여기에 코드를 작성하세요
+  let result = 0;
+  for (let i = 0; i < num; i++) {
+    if (i % 3 === 0) {
+      result += i;
+    } else if (i % 5 === 0) {
+      result += i;
+    }
+  }
+  return result;
 }
