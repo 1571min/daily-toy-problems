@@ -7,11 +7,29 @@
  */
 
 /**
-  * example usage:
-  * var anagrams = allAnagrams('abc');
-  * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
-  */
+ * example usage:
+ * var anagrams = allAnagrams('abc');
+ * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
+ */
 
-var allAnagrams = function(string) {
+var allAnagrams = function (string) {
   // Your code here.
+  let stringArr = string.split('');
+  let result = [];
+  let recursion = (Arr, count) => {
+    if (count === string.length) {
+      result.push(Arr.join(''));
+      return;
+    }
+    for (let i = count; i < string.length; i++) {
+      let temp = Arr[count];
+      Arr[count] = Arr[i];
+      Arr[i] = temp;
+      recursion(Arr, count + 1);
+      Arr[i] = Arr[count];
+      Arr[count] = temp;
+    }
+  };
+  recursion(stringArr, 0);
+  return Array.from(new Set(result));
 };
