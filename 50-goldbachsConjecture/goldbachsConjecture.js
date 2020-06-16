@@ -17,8 +17,30 @@ goldbachsConjecture(12) // "12 = 7 + 5"
 
 function goldbachsConjecture(num) {
   // 여기에 코드를 입력하세요
+  let primeList = [];
+  for (let i = 2; i < num; i++) {
+    if (primeNumber(i)) {
+      primeList.push(i);
+    }
+  }
+
+  for (let i = 0; i < primeList.length; i++) {
+    for (let j = primeList.length - 1; j >= 0; j--) {
+      if ((primeList[i] + primeList[j]) === num) {
+        return '' + num + ' = ' + primeList[i] + ' + ' + primeList[j];
+      }
+    }
+  }
+  return '' + num + ' = ' + 0 + ' + ' + 0;
 }
 
 function primeNumber(num) {
   // 인자로 전달되는 숫자가 소수인지 여부를 확인하는 코드를 먼저 작성하면 문제를 푸는 데 도움이 됩니다
+  if (num === 1) return false;
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
